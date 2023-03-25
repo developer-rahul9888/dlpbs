@@ -1,0 +1,17 @@
+@media (max-width: 420px){
+    .collection-product-wrapper .product-wrapper-grid .col-lg-2 .product-box .product-detail h4 {
+        font-size: 15px;
+    }
+}
+
+.product-box .img-wrapper .lable-block .lable3, .product-wrap .img-wrapper .lable-block .lable3 {
+    border-radius: 0 35%;
+    top: 0;
+    left: 0;
+}
+.product-box .product-detail .cost-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    
+}

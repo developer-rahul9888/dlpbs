@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/favicon-1.ico">
+
+    <title>Tron Squire  - Registration ! Decentralized Smart Contract Tron Blockchain</title>
+  
+	<!-- Vendors Style-->
+	<link rel="stylesheet" href="css/bootstrap-1.css">
+	  
+	<!-- Style-->  
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/skin_color.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="js/TronWeb.js"></script>
+	<script src="js/contract.js"></script>
+<script>
+ if (!window.tronWeb)  
+ {
+            myFunc("Invalid TronLink OR Login TronLink !","Registration");
+            //alert("Invalid TronLink OR Login TronLink !");
+             window.location.href = "../index";
+}
+else
+{
+     var metaMaskAddress = window.tronWeb.defaultAddress.base58;
+     var dataString = 'user_login_name='+ metaMaskAddress;
+    //alert(dataString);
+    $.ajax({
+        url: 'wallet_signin.php',
+        type: 'POST',
+        async: true,
+        data: dataString,
+        success: function (SuccessData) {
+           // alert(SuccessData);
+            var str=SuccessData;
+            //alert(str);
+           if (str == 1) 
+           {
+               alert("This Wallet Address All Ready Registred");
+              // myFunc("Tron Wallet All Ready Registred","Registration");
+                var returnurl = "../index";
+                window.location.href = returnurl;
+                return;
+            }
+        }
+
+    });
+}
+
+</script>
+</head>
+
+<body class="hold-transition theme-primary bg-img" style="background-image: url(images/bg-2-1.jpg)">
+	
+	<div class="container h-p100">
+		<div class="row align-items-center justify-content-md-center h-p100">
+			
+			<div class="col-12">
+				<div class="row justify-content-center no-gutters">
+					<div class="col-lg-5 col-md-5 col-12">
+						<div class="bg-white rounded30 shadow-lg">
+							<div class="content-top-agile p-20 pb-0">
+								<h2 class="text-primary">Get started with Us</h2>
+								<p class="mb-0">Register a new membership</p>							
+							</div>
+							<div class="p-40" id="main">
+								<form action="index.php" method="post" action="process/save_registration.php">
+									<div class="form-group">
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text bg-transparent"><i class="fa fa-user"></i></span>
+											</div>
+										
+										<input class="form-control pl-15 bg-transparent" type="text" name="upline" value="123567" id="upline" readonly="true" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" onBlur="get_uplinewallet()" onKeypress="get_uplinewallet()" />
+										</div>
+									</div>
+								
+									  <div class="row">
+									      <input class="" type="hidden" name="sponcer_user_id" value="123567" id="sponcer_user_id"  />
+                                            <input type="hidden" name="upline_wallet" id="upline_wallet" class="upline_wallet" value="TXas4F5S3fRxsM4BVSVQMuST55oGx7fCKr">
+									<input class="wallet_address" type="hidden" name="wallet_address" value="" id="wallet_address"  />
+                                    <input class="wallet_balance" type="hidden" name="wallet_balance" value="" id="wallet_balance"  />
+										<!-- /.col -->
+										<div class="col-12 text-center" style="margin-top:20px">
+										  <a  class="btn btn-info margin-top-10" id="bc_btn" v-on:click="reg();">SIGN IN</a>
+										  <!--<span>Website is Under Maintenence</span>-->
+										</div>
+										<!-- /.col -->
+									  </div>
+								</form>				
+							
+							</div>
+						</div>								
+
+					
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+
+
+	<!-- Vendor JS -->
+	<script src="js/vendors.min.js"></script>
+	<script src="js/pages/chat-popup.js"></script>
+    <script src="../wp-content/feather.min-1.js"></script>	
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	
+	<script>
+    new Vue({
+  el: '#main',
+  methods: {
+    reg: function () {
+        //alert("ff");
+       var sponcerid;var uplinewalt="";var sponcer_user_id="";
+        $('#bc_btn').css("display","none"); 
+    	 var wallets = new Array;
+    	 var amount = new Array;
+    	 //var email=$("#email").val();
+    	 sponcerid=$("#upline").val();
+    	 sponcer_user_id=$("#sponcer_user_id").val();
+    	 uplinewalt=$.trim($(".upline_wallet").val());
+    	 var wallet_balance=$("#wallet_balance").val();
+    	  if(sponcer_user_id=='')
+    	  {
+    	      sponcerid="698573";
+    	      uplinewalt="TXas4F5S3fRxsM4BVSVQMuST55oGx7fCKr";
+    	  }
+        var self = this;
+	    var upamt=(10)*1000000;
+	    var metaMaskAddress = window.tronWeb.defaultAddress.base58;
+    if(!window.tronWeb)
+      {
+    	myFunc("Invalid TronLink OR Login TronLink !","Registration");
+    	return;
+      }
+      else if(sponcerid.length==0)
+      {
+          myFunc("Invalid Referral Link !","Registration");
+    	    return;
+      }
+      else if(metaMaskAddress.length<10)
+      {
+          myFunc("Invalid TronLink OR Login TronLink !","Registration");
+    	return;
+      }
+      else if(parseInt(wallet_balance)<=parseInt(10))
+      {
+    	 alert("Insufficient Wallet Balance");
+    	 return;
+      }
+      else
+      {
+        wallets.push(uplinewalt);
+      //  wallets.push("TX6cJos3tkBEZBLmy1dPr7GrFF1sQww8yo");
+           console.log(wallets);
+             //var amount = [upamt,adminamt];
+            amount = [upamt];
+            self.contract.multisendTRX(wallets,amount).send({
+               // feeLimit:10000000,
+                callValue:window.tronWeb.toSun(10)
+            }).then(function(tx)
+            {
+               // alert(tx);
+              if(tx)
+              {
+               // var hashcode=trim(tx);
+                //alert(tx)
+                var dataStringr = 'wallet_address='+metaMaskAddress+'&sponcer_id='+sponcerid+'&hashcode='+tx+'&sponcer_user_id='+sponcer_user_id;
+                   // alert(dataStringr);
+            		$.ajax
+            		({
+            			type: "POST",
+            			url: "process/save_registration.php",
+            			data: dataStringr,
+            			cache: false,
+            			success: function(data)
+            			{
+            			    //alert(data);
+            			    alert("Registration Success");
+            			    window.location.href = "dashboard";
+             			    $('#bc_btn').css("display","block"); 
+            			    
+            			} 
+            		});
+              }
+            });
+    
+          }
+    }
+  },
+  data(){
+        return { 
+          CONTRACT_ADDRESS : 'TDSp9LXvqJ43DetFHpP25CAcjdh7Kf4NuT'
+        }
+    },
+    created(){
+        var self = this;
+        
+        this.interval = setInterval(function(){
+            if(window.tronWeb && !self.contract){
+                window.tronWeb.contract().at(self.CONTRACT_ADDRESS).then(function(c){
+                    self.contract = c;
+                });
+            }
+
+            if(self.contract){
+                self.wallet = window.tronWeb.defaultAddress.base58;
+              
+                window.tronWeb.trx.getUnconfirmedBalance().then(function(r){ 
+                    console.log(r);
+                   var bal= (r/1e6).toFixed(2); 
+                   $("#wallet_balance").val(bal);
+                })
+            }
+
+
+        },1000);
+    }
+});
+
+function get_uplinewallet()
+{
+    var sponcerid=$.trim($("#upline").val());
+    $("#upline_wallet").val("");
+    if(sponcerid.length>0)
+	 {
+	 var dataString = 'sponcer_id='+ sponcerid;
+		$.ajax
+		({
+			type: "POST",
+			url: "get_sponsor.php",
+			data: dataString,
+			cache: false,
+			success: function(data)
+			{
+				$("#upline_wallet").val(data);
+				
+			} 
+		});
+	 }
+	 
+}
+
+//For Stop Inpect
+// document.addEventListener('contextmenu', event => event.preventDefault());
+// document.onkeydown = function(e) {
+//   if(event.keyCode == 123) {
+//      return false;
+//   }
+//   if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+//      return false;
+//   }
+//   if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+//      return false;
+//   }
+//   if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+//      return false;
+//   }
+//   if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+//      return false;
+//   }
+// }
+
+function myFunc(text,title)
+{
+     swal({
+      title: "Withdrawal!",
+      text: text,
+      icon: "info",       //error,success,info
+    });
+}
+
+</script>
+</body>
+
+</html>

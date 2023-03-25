@@ -1,0 +1,35 @@
+.card-body.form-group.share-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    margin: 0;
+}
+.share-link lable {
+    padding: 8px 15px;
+    background-color: #ffbc58;
+    border: 1px solid #ffbc58;
+    background: transparent;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    position: absolute;
+    top: -15px;
+    left: 0;
+    z-index: 9;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #555;
+    opacity:0;
+    transition: opacity 0.3s;
+    transition: 1s ease;
+}
+.share-link:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
